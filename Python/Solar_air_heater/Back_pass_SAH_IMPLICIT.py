@@ -72,9 +72,9 @@ Data_time_step = 60.        # This is the time resolution of the input data (s)
 
 
 
-Input_file = "Data Stuttgart Aug2022 minute_LOCALTIME_mdot.txt"
-Output_file = "Output_SAH_Stutt_Aug2022_27.05.2024.txt"
-Output_file_DETAILS = "Output_SAH_Stutt_Aug2022_DETAILS_27.05.2024.txt"
+Input_file = "Data_Stuttgart_Aug2022_minute.txt"
+Output_file = "Output_SAH_Stutt_Aug2022.txt"
+Output_file_DETAILS = "Output_SAH_Stutt_Aug2022_DETAILS.txt"
 
 # READING DATA FROM FILE
 date, hour_min, hour_decimal, time_row, Ins, Tamb, rh_amb, wind, Patm, X, Tdewp, mdot_a = extract_data(Input_file, 12002, 14281)

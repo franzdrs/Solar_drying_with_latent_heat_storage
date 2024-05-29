@@ -1,7 +1,7 @@
 This folder contains the fortran90 code file to simulate a latent heat storage unit composed of rectangular slabs filled with PCM. 
 It also contains some sample input and output data files. 
 
-The program takes an input data file. Im the framework of the present code package, this input file is the output file from the solar air heater program. 
+The program takes an input data file. In the framework of the present code package, this input file is the output file from the solar air heater program. 
 Besides some header lines containing the setup of the solar air heater simulation, each row contains the following data:
 - Date (the date)
 - Hour_min (the time of day)

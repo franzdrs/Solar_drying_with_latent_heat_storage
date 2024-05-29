@@ -4,3 +4,5 @@ As it is, the code is set up for the drying of wheat according to wheat's physic
 
 In the code for the solar air heater and latent heat storage the code was organized in such a way that the user inputs are all concentrated on the top of the code down to a certain line, after which the rest are the internal calculations. In the case of this code for the fixed bed dryer, if the user wants to simulate the drying of a crop different than wheat, he/she must modify the code at other few locations to calculate the values based on the sorption isotherm equation and the thin-layer drying equation.
 
+The program reads an input data file. In the framework of the present code package, this input file can be the output file from the solar air heater or the latent heat storage programs, which are similar except for an extra row in the latter. Accordingly, the dryer code includes two subroutines to read the input file and the user has to call the correct one.
+

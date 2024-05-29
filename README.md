@@ -11,7 +11,8 @@
 - The programs are given "as is" and the user can modify them to suit their needs. This is particularly the case of the FDB. This programs requires some input data for a given agricultural
   product which are not a fixed value but an equation which is specific to a given product. More info on this is given in the folder with the FBD code and in the program comments.
 - Reading the comments in the programs from top to bottom should give the user a good idea of how the programs work and where the user is expected to provide input.
+- The codes were originally written in python and later translated to fortran90. Bothe versions are equivalent, but, under the setup employed by the author at least, the fortran code runs significantly faster (in Visual Studio using Intel Fortran Compiler)  
 
 - The following published papers give more detail into the mathematical models and their solution procedure:
-      10.1016/j.ecmx.2022.100327 (A comparison of steady-state and transient modelling approaches for the performance prediction of solar air heaters)
-      10.1016/j.ecmx.2024.100600 (Performance comparison of a fixed-bed solar grain dryer with and without latent heat storage)
+  10.1016/j.ecmx.2022.100327 (A comparison of steady-state and transient modelling approaches for the performance prediction of solar air heaters),
+  10.1016/j.ecmx.2024.100600 (Performance comparison of a fixed-bed solar grain dryer with and without latent heat storage)

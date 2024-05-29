@@ -16,3 +16,6 @@
 - The following published papers give more detail into the mathematical models and their solution procedure:
   10.1016/j.ecmx.2022.100327 (A comparison of steady-state and transient modelling approaches for the performance prediction of solar air heaters),
   10.1016/j.ecmx.2024.100600 (Performance comparison of a fixed-bed solar grain dryer with and without latent heat storage)
+
+
+Cite the code: [![DOI](https://zenodo.org/badge/807495966.svg)](https://zenodo.org/doi/10.5281/zenodo.11389055)

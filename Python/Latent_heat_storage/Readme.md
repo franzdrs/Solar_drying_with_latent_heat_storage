@@ -1,4 +1,4 @@
-This folder contains the fortran90 code file to simulate a latent heat storage unit composed of rectangular slabs filled with PCM. 
+This folder contains the python code file to simulate a latent heat storage unit composed of rectangular slabs filled with PCM. 
 It also contains some sample input and output data files. 
 
 The program takes an input data file. In the framework of the present code package, this input file is the output file from the solar air heater program. 

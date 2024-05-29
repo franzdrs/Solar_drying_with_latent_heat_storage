@@ -60,10 +60,10 @@ relax = 1.               # Underrelaxation factor, can be lower than 1 for stabi
 
 
 
-Input_file = "Output_SAH_Stutt_Aug2022_27.05.2024.txt"
-Output_file = "LHS_output_Stutt_Aug2022_27.05.2024A.txt"
-Output_file_DETAILS_T = "LHS_output_Stutt_Aug2022_DETAILS_T_27.05.2024A.txt"
-Output_file_DETAILS_H = "LHS_output_Stutt_Aug2022_DETAILS_H_27.05.2024A.txt"
+Input_file = "Output_SAH_Stutt_Aug2022_as_INPUT.txt"
+Output_file = "LHS_output_Stutt_Aug2022.txt"
+Output_file_DETAILS_T = "LHS_output_Stutt_Aug2022_DETAILS_T.txt"
+Output_file_DETAILS_H = "LHS_output_Stutt_Aug2022_DETAILS_H.txt"
 
 # READING DATA FROM FILE
 date, hour_min, hour_dec, t_min, Ins, Tamb, wind, P_atm, X_in, Ta_in, mdot_a = extract_data(Input_file)

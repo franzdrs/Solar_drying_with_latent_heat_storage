@@ -1,0 +1,788 @@
+#ESI!
+4.0
+Latent Heat Storage
+0
+
+Franz Roman
+University of Kassel
+1
+
+1
+28
+May 03, 2024
+
+May 03, 2024
+1
+
+noowner
+__
+__
+__
+1
+This Type calculates the performance of a latent heat storage unit consisting of a number of parallel rectangular slabs filled with PCM. The slabs are separated by air gaps through which air flows. The model is in 2D, so the length and thickness of the slab is modelled while the conditions along the width are considered constant. There are three main differential equations: for the flowing air, the slab wall and the PCM. The user must give the air, PCM and slab wall properties as well as other parameters. The equations are solved using finite differences. The enthalpy formulation is used for the pahse change. The user can input different but constant properties for the liquid and solid phase of the PCM (density, specific heat, and thermal conductivity). The PCM is assumed to melt in a temperature range defined by the user. The user defines the centerpoint of the range and the width of the range. The model can also be used for isothermal phase change by simply using a very narrow temperature range (i.e. 0.1 K) which virtually gives the same results as true isothermal phase change.  
+0
+0
+0
+0
+0
+0
+__
+__
+__
+1
+
+0
+__
+__
+__
+__
+0
+0
+__
+.\Studio\Proformas\Thermal Storage\Latent Heat Storage\Type201_new.f90
+__
+__
+__
+40
+relax
+SN
+1
+Underrelaxation factor
+simple
+real
+3
++
+0
+1
+] ; ]
+0.8
+0
+-
+Dimensionless
+rho_s
+SN
+1
+Density of solid PCM
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1517
+0
+kg/m^3
+Density
+rho_l
+SN
+1
+Density of liquid PCM
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1442
+0
+kg/m^3
+Density
+ks
+SN
+2
+Thermal conductivity of solid PCM
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.6
+0
+W/m.K
+Thermal Conductivity
+kl
+SN
+2
+Thermal conductivity of liquid PCM
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.6
+0
+W/m.K
+Thermal Conductivity
+cs
+SN
+1
+Specific heat of solid PMC
+simple
+real
+3
++
+0
++Inf
+] ; ]
+2000
+0
+J/kg.K
+Specific Heat
+cl
+SN
+1
+Specific heat of liquid PCM
+simple
+real
+3
++
+0
++Inf
+] ; ]
+2000
+0
+J/kg.K
+Specific Heat
+L
+SN
+1
+Latent heat of PCM
+simple
+real
+3
++
+0
++Inf
+[ ; ]
+190000
+0
+J/kg
+Specific Energy
+Tm
+SN
+1
+Melting temperature (for isothermal phase change) or MIdpoint of phase change range (for non-isothermal phase change).
+simple
+real
+3
++
+-273.15
++Inf
+[ ; ]
+40
+0
+C
+Temperature
+T_range
+SN
+1
+Phase change temperature range
+simple
+real
+3
++
+0
++Inf
+[ ; ]
+4
+0
+deltaC
+Temp. Difference
+rho_a
+SN
+1
+Air density (constant)
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1.127
+0
+kg/m^3
+Density
+c_a
+SN
+1
+Air specific heat (constant)
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1007.0
+0
+J/kg.K
+Specific Heat
+mu_a
+SN
+1
+Air dynamic viscosity (constant)
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.00001907
+0
+N.s/m^2
+Dynamic Viscosity
+k_a
+SN
+1
+Air thermal conductivity (constant)
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.02735
+0
+W/m.K
+Thermal Conductivity
+Pr
+SN
+1
+Air Prandtl number
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.706
+0
+-
+Dimensionless
+rho_w
+SN
+1
+Density of PCM slab wall
+simple
+real
+3
++
+0
++Inf
+] ; ]
+2670
+0
+kg/m^3
+Density
+thickn_w
+SN
+1
+Thickness of PCM slab wall
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.0005
+0
+m
+Length
+c_w
+SN
+1
+Specific heat of PCM slab wall
+simple
+real
+3
++
+0
++Inf
+] ; ]
+890
+0
+J/kg.K
+Specific Heat
+k_w
+SN
+1
+Thermal conductivity of PCM slab wall
+simple
+real
+3
++
+0
++Inf
+] ; ]
+130
+0
+W/m.K
+Thermal Conductivity
+N_slabs
+SN
+1
+Number of slabs
+simple
+integer
+3
++
+1
++Inf
+[ ; ]
+29
+0
+-
+Dimensionless
+Slab_length
+SN
+1
+Slab length
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1.2
+0
+m
+Length
+Slab_width_s
+SN
+1
+PCM width/height in the slab when material is solid. This is actually the width that the PCM material occupies in the slab when it is solid. As the PCM melts and its density drops, the width/height occupied by the PCM increases. In the code there is also 2 other related widths/heights: the Duct_width and the pcm_width. The Duct_width is the actual width of the duct where the PCM slabs are and it is considered to be equal to the maximum width that the PCM material will occupy when it is completely liquid. The pcm_width is the actual instantaneous width/height of the PCM. It is equal to Slab_width_s when all the PCM in the slab is solid, and equal to the Duct_width when all is liquid.
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.5
+0
+m
+Length
+Slab_thickness
+SN
+1
+Thickness of the PCM material in the slab, that is, excluding the thickness of the container wall
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.01
+0
+m
+Length
+Air_gap
+SN
+1
+The thickness of the air gap between slabs
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.01
+0
+m
+Length
+dx_tentative
+SN
+1
+The grid size (deltaX) along the slab length. This is a tentative value because the actual dx has to divide the slab length into an integer number of sections.
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.02
+0
+m
+Length
+dy_tentative
+SN
+1
+Similar to dx_tentative but along the slab thickness
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.001
+0
+m
+Length
+TOL_delta_H
+SN
+1
+The tolerance for the enthalpy difference bewteen iterations
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.1
+0
+J/kg
+Specific Energy
+TOL_delta_Ta
+SN
+1
+The tolerance for the air tempererature difference bewteen iterations
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.0001
+0
+deltaC
+Temp. Difference
+TOL_delta_Tw
+SN
+1
+The tolerance for the wall temperature difference between iterations
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.0001
+0
+deltaC
+Temp. Difference
+T0
+SN
+1
+Initital PCM temperature
+simple
+real
+3
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Tair_in
+SN
+1
+Inlet air temperature
+simple
+real
+1
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+mdot_a
+SN
+1
+Mass flow rate
+simple
+real
+1
++
+0
++Inf
+] ; ]
+0.25635869
+0
+kg/s
+Flow Rate
+Ta_out_mixed
+SN
+1
+Outlet air temperature from LHS. It is called mixed because it considers the result of the air that flows past the PCM in the slabs and the air that flows past the head space where there is no PCM. This last air temperature is equal to the inlet temperature.
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+20
+0
+C
+Temperature
+mdot_a
+SN
+1
+Outlet airflow rate. Same as inlet airflow rate.
+simple
+real
+2
++
+0
++Inf
+] ; ]
+0.2
+0
+kg/s
+Flow Rate
+Xa_out
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0.01
+0
+-
+dimensionless
+Avg PCM temperature
+SN
+1
+Average liquid fraction in the slab
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+20
+0
+C
+Temperature
+Total enthalpy
+SN
+1
+
+simple
+real
+2
++
+-Inf
++Inf
+[ ; ]
+1
+0
+kJ
+Energy
+Xa_in
+SN
+1
+
+simple
+real
+1
++
+0
++Inf
+[ ; ]
+0.01
+0
+-
+dimensionless
+Lambda_avg
+SN
+1
+
+simple
+real
+2
++
+0
+1
+[ ; ]
+0
+0
+-
+dimensionless
+iterations
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0
+0
+-
+dimensionless
+0
+0
+0
+0
+0
+
+*** trnModel specific properties ***
+9999
+201
+
+9
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+9
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+0
+0
+2
+0
+
+
+1
+100
+0
+6
+0
+
+
+1
+100
+0
+29
+0
+
+
+1
+100
+-1
+-1
+0
+
+
+1
+100

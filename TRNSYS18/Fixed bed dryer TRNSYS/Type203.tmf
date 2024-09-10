@@ -1,0 +1,971 @@
+#ESI!
+4.0
+Fixed Bed Dryer
+0
+
+Franz Roman
+University of Kassel
+1
+
+1
+24
+June 13, 2024
+
+June 13, 2024
+1
+
+noowner
+__
+__
+__
+7
+This Type models the drying of agricultural materials in a fixed bed. It is an implementation of the mathematical model by Bakker Arkema described in the book "Drying and storage of grains and oilseeds" by Brooker, Bakker-Arkema and Hall" (1992). The are four differential equations for product moisture and temperature, air temperature and air humidity. The height  of the  product bulk is divided in a number of sections defined by the user and the equations are solved in the nodes using the finite difference method. The equations are solved iteratively until the convergence criteria (also defined by the user) are met.
+
+The equation for the product moisture takes the form of a thin-layer drying equation. Additionally, a sorption isotherm equation relating temperature, relative humidity and moisture content is required. Functions external to the Type Subroutine appear at the end of the file to calculate equilibrium moisture content and relative humidity, and the thin-layer parameters. Both the thin-layer drying equation and the isotherm equation vary from product to product and for a given product different equations can be found in the literature. As is, the Type contains these equations for wheat (the Oswin isotherm model and the Page thin layer drying model, both taken from the paper by Ramaj (2021). If these equations are changed, care must be taken by the user to ensure that the units remain correct, since different authors develop their isotherm and thin-layer drying equations with different units (time in h, min or s; moisture in %wb, %db or decimal db, relative humidity in decimal or %, and so on). The code in this type uses time in s, moisture content in decimal db, relative humdity in decimal).
+
+If the mentioned functions after the subroutine are modified to model a different product, the INTERFACE block at the beginning of the subroutine has to be changed accordingly. 
+
+0
+0
+0
+0
+0
+0
+__
+__
+__
+1
+
+0
+__
+__
+__
+__
+0
+0
+__
+.\Studio\Proformas\Fixed bed dryer_new\Type203.f90
+__
+__
+__
+52
+Inlet air temperature
+SN
+1
+
+simple
+real
+1
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Inlet air humidity ratio
+SN
+1
+
+simple
+real
+1
++
+0
++Inf
+[ ; ]
+0.01
+0
+-
+Dimensionless
+Atmospheric pressure
+SN
+1
+
+simple
+real
+1
++
+0
++Inf
+[ ; ]
+101325
+0
+Pa
+Pressure
+Air mass flow rate
+SN
+1
+
+simple
+real
+1
++
+-Inf
++Inf
+[ ; ]
+0.25635869
+0
+kg/s
+Flow Rate
+Inlet air RH
+SN
+1
+
+simple
+real
+2
++
+0
+1
+[ ; ]
+0.39
+0
+-
+Dimensionless
+Outlet air temperature
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Outlet air humidity ratio
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0.01
+0
+-
+dimensionless
+Air mass flow rate
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+] ; ]
+0.25635869
+0
+kg/s
+Flow Rate
+Avg. moisture content
+SN
+1
+
+simple
+real
+2
++
+-Inf
++Inf
+[ ; ]
+0.28205
+0
+-
+dimensionless
+Avg. product temperature
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Number of iterations
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+1
+0
+-
+dimensionless
+Moisture at 0 height
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0.3
+0
+-
+dimensionless
+Moisture at 0.125 height
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0.3
+0
+-
+dimensionless
+Moisture at 0.25 height
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0.3
+0
+-
+dimensionless
+Moisture at 0.375 height
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0.3
+0
+-
+dimensionless
+Moisture at 0.5 height
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0.3
+0
+-
+dimensionless
+Moisture at 0.625 height
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0.3
+0
+-
+dimensionless
+Moisture at 0.75 height
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0.3
+0
+-
+dimensionless
+Moisture at 0.875 height
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0.3
+0
+-
+dimensionless
+Moisture at 1 height
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0.3
+0
+-
+dimensionless
+Prod. temp at 0 height
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Prod. temp at 0.125 height
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Prod. temp at 0.25 height
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Prod. temp at 0.375 height
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Prod. temp at 0.5 height
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Prod. temp at 0.626 height
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Prod. temp at 0.75 height
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Prod. temp at 0.875 height
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Prod. temp at 1 height
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Underrelaxation factor
+SN
+1
+
+simple
+real
+3
++
+0
+1
+] ; ]
+0.8
+0
+-
+dimensionless
+Initial product mass
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1000
+0
+kg
+Mass
+Initial moisture content
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+[ ; ]
+0.28205
+0
+-
+dimensionless
+Initial bulk temperature
+SN
+1
+
+simple
+real
+3
++
+-273.15
++Inf
+[ ; ]
+24.4
+0
+C
+Temperature
+Bulk porosity
+SN
+1
+
+simple
+real
+3
++
+0
+1
+] ; [
+0.4
+0
+-
+dimensionless
+Product surface area per bulk m3
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1181
+0
+m^-1
+Inverse Length
+Equivalent particle diameter
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.004
+0
+m
+Length
+Dry product specific heat
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1240
+0
+J/kg.K
+Specific Heat
+Bulk density at Mp0
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+659.4403
+0
+kg/m^3
+Density
+Dryer side length
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1.5
+0
+m
+Length
+Air density
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1.127
+0
+kg/m^3
+Density
+Air specific heat
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1007
+0
+J/kg.K
+Specific Heat
+Air dynamic viscosity
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1.907e-5
+0
+N.s/m^2
+Dynamic Viscosity
+Specific heat of water vapor
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1883
+0
+J/kg.K
+Specific Heat
+Specific heat of liquid water
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+4187
+0
+J/kg.K
+Specific Heat
+Tentative grid size
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.008
+0
+m
+Length
+Tolerance deltaXp
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.00001
+0
+-
+Dimensionless
+Tolerance deltaTp
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.001
+0
+K
+Temperature
+Tolerance deltaXa
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.00001
+0
+-
+Dimensionless
+Tolerance deltaTa
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.001
+0
+K
+Temperature
+Height
+SN
+1
+
+simple
+real
+2
++
+-Inf
++Inf
+[ ; ]
+0
+0
+-
+dimensionless
+M
+SN
+1
+
+simple
+real
+2
++
+-Inf
++Inf
+[ ; ]
+0
+0
+-
+dimensionless
+dz
+SN
+1
+
+simple
+real
+2
++
+-Inf
++Inf
+[ ; ]
+0
+0
+-
+dimensionless
+0
+0
+0
+0
+0
+
+*** trnModel specific properties ***
+9999
+203
+
+9
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+9
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+0
+0
+3
+0
+
+
+1
+100
+0
+27
+0
+
+
+1
+100
+0
+19
+0
+
+
+1
+100
+-1
+-1
+0
+
+
+1
+100

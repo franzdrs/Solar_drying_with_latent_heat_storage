@@ -1,0 +1,968 @@
+#ESI!
+4.0
+Solar air heater 
+0
+
+Franz Roman
+University of Kassel
+1
+
+1
+24
+May 27, 2024
+
+May 27, 2024
+1
+
+noowner
+__
+__
+__
+3
+This Type describes the operation of a back pass, single cover, solar air heater (SAH). The model is one-dimensional and trasient in nature. The main model components are four partial differential equations for cover, absorber plate, air flow and bottom plate. The user must provide the SAH dimensions as well as material properties of the collector components and air. The lenght of the SAH is divided in a number of sections defined by the user and the equations are solved in the nodes using the finite difference method. The equations are solved iteratively until the convergence criteria (also defined by the user) are met.
+
+
+0
+0
+0
+0
+0
+0
+__
+__
+__
+1
+
+0
+__
+__
+__
+__
+0
+0
+__
+.\Studio\Proformas\Solar Thermal Collectors\Solar air heater\Type202.f90
+__
+__
+__
+52
+h_dec
+SN
+1
+
+simple
+real
+1
++
+0
+24
+[ ; ]
+12
+0
+hr
+Time
+Solar radiation
+SN
+1
+
+simple
+real
+1
++
+0
++Inf
+[ ; ]
+500
+0
+W/m^2
+Flux
+Ambient temperature
+SN
+1
+
+simple
+real
+1
++
+-273.15
++Inf
+[ ; ]
+20
+0
+C
+Temperature
+Relative humidity
+SN
+1
+
+simple
+real
+1
++
+0
+100
+[ ; ]
+80
+0
+-
+Dimensionless
+Wind speed
+SN
+1
+
+simple
+real
+1
++
+0
++Inf
+[ ; ]
+1
+0
+m/s
+Velocity
+Atmospheric pressure
+SN
+1
+
+simple
+real
+1
++
+0
++Inf
+[ ; ]
+101325
+0
+Pa
+Pressure
+Mass flow rate
+SN
+1
+
+simple
+real
+1
++
+0
++Inf
+] ; ]
+0.2
+0
+kg/s
+Flow Rate
+Outlet air temperature
+SN
+1
+
+simple
+real
+2
++
+-273.15
++Inf
+[ ; ]
+20
+0
+C
+Temperature
+Mass flow rate
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+] ; ]
+0.2
+0
+kg/s
+Flow Rate
+Collector efficiency
+SN
+1
+
+simple
+real
+2
++
+-Inf
++Inf
+[ ; ]
+0.5
+0
+-
+dimensionless
+Useful energy rate
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0
+0
+W
+Power
+Number of iterations
+SN
+1
+
+simple
+real
+2
++
+1
++Inf
+[ ; ]
+1
+0
+-
+dimensionless
+Underrelaxation factor
+SN
+1
+
+simple
+real
+3
++
+0
+1
+] ; ]
+1.0
+0
+-
+dimensionless
+Collector length
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+3
+0
+m
+Length
+Collector width
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+2
+0
+m
+Length
+Air channel height
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.05
+0
+m
+Length
+Gap cover-absorber
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.05
+0
+m
+Length
+Collector tilt
+SN
+1
+
+simple
+real
+3
++
+0
+90
+[ ; ]
+0
+0
+degrees
+Direction (Angle)
+Cover thickness
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.003
+0
+m
+Length
+Absorber thickness
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.001
+0
+m
+Length
+Bottom plate thickness
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.001
+0
+m
+Length
+Cover conductivity
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+[ ; ]
+1.05
+0
+W/m.K
+Thermal Conductivity
+Absorber conductivity
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+[ ; ]
+220
+0
+W/m.K
+Thermal Conductivity
+Bottom plate conductivity
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+[ ; ]
+220
+0
+W/m.K
+Thermal Conductivity
+Cover specific heat
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+[ ; ]
+660
+0
+J/kg.K
+Specific Heat
+Absorber specific heat
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+[ ; ]
+890
+0
+J/kg.K
+Specific Heat
+Bottom plate specific heat
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+[ ; ]
+890
+0
+J/kg.K
+Specific Heat
+Cover density
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+2500
+0
+kg/m^3
+Density
+Absorber density
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+2700
+0
+kg/m^3
+Density
+Bottom plate density
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+2700
+0
+kg/m^3
+Density
+Insulation thickness
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.1
+0
+m
+Length
+nsulation conductivity
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+[ ; ]
+0.04
+0
+W/m.K
+Thermal Conductivity
+Cover absorptance
+SN
+1
+
+simple
+real
+3
++
+0
+1
+[ ; ]
+0.06
+0
+-
+dimensionless
+Absorber absorptance
+SN
+1
+
+simple
+real
+3
++
+0
+1
+[ ; ]
+0.95
+0
+-
+dimensionless
+Bottom plate absorptance
+SN
+1
+
+simple
+real
+3
++
+0
+1
+[ ; ]
+0.95
+0
+-
+dimensionless
+Cover transmittance
+SN
+1
+
+simple
+real
+3
++
+0
+1
+[ ; ]
+0.84
+0
+-
+dimensionless
+Cover emittance
+SN
+1
+
+simple
+real
+3
++
+0
+1
+[ ; ]
+0.9
+0
+-
+dimensionless
+Absorber emittance up
+SN
+1
+
+simple
+real
+3
++
+0
+1
+[ ; ]
+0.95
+0
+-
+dimensionless
+Absorber emittance down
+SN
+1
+
+simple
+real
+3
++
+0
+1
+[ ; ]
+0.95
+0
+-
+dimensionless
+Bottom plate emittance
+SN
+1
+
+simple
+real
+3
++
+0
+1
+[ ; ]
+0.95
+0
+-
+dimensionless
+Air density
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1.127
+0
+kg/m^3
+Density
+Air specific heat
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+1007
+0
+J/kg.K
+Specific Heat
+Air dynamic viscosity
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.00001907
+0
+N.s/m^2
+Dynamic Viscosity
+Air conductivity
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.02735
+0
+W/m.K
+Thermal Conductivity
+dx tentative
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.1
+0
+m
+Length
+Tolerance deltaTg
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.00001
+0
+C
+Temperature
+Tolerance deltaTp
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.00001
+0
+C
+Temperature
+Tolerance deltaTf
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.00001
+0
+C
+Temperature
+Tolerance deltaTb
+SN
+1
+
+simple
+real
+3
++
+0
++Inf
+] ; ]
+0.00001
+0
+C
+Temperature
+Initial collector temperature
+SN
+1
+
+simple
+real
+3
++
+-273.15
++Inf
+[ ; ]
+20
+0
+C
+Temperature
+Inlet air temperature
+SN
+1
+
+simple
+real
+1
++
+-273.15
++Inf
+[ ; ]
+20
+0
+C
+Temperature
+Outlet air humidity ratio
+SN
+1
+
+simple
+real
+2
++
+0
++Inf
+[ ; ]
+0
+0
+-
+dimensionless
+0
+0
+0
+0
+0
+
+*** trnModel specific properties ***
+9999
+202
+
+9
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+
+
+
+0
+9
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+
+
+
+0
+
+
+0
+0
+0
+7
+0
+
+
+1
+100
+0
+5
+0
+
+
+1
+100
+0
+37
+0
+
+
+1
+100
+-1
+-1
+0
+
+
+1
+100

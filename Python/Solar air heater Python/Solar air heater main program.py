@@ -72,7 +72,7 @@ def saturation_vapor_pressure(Tad):      # Saturation vapor pressure at some tem
 
 # MAIN PROGRAM
 
-Input_file = "Data_Stuttgart_Aug2022_minute - SOFTX.txt"
+Input_file = "Data_Stuttgart_Aug2022_minute_resolution.txt"
 Output_file = "SAH_Output_7m2_Stutt_7_8Aug2022.txt"
 Output_file_DETAILS = "SAH_Output_7m2_Stutt_7_8Aug2022_DETAILS.txt"
 

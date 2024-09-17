@@ -99,11 +99,11 @@ program SAH
     double precision, allocatable :: delta_Tg(:), delta_Tp(:), delta_Tf(:), delta_Tb(:) 
     
     character(len=20) :: temp_string, real_string
-    character(len=100) :: output_file = 'SAH_Output_20m2_Stutt_7_8Aug2022A.txt'       ! Name of output file to be used as input by donwstream component
-    character(len=100) :: output_file_details = 'SAH_Output_20m2_Stutt_7_8Aug2022_detailsA.txt' ! Name of output file with detailed data
+    character(len=100) :: output_file = 'SAH_Output_20m2_Stutt_7_8Aug2022.txt'       ! Name of output file to be used as input by donwstream component
+    character(len=100) :: output_file_details = 'SAH_Output_20m2_Stutt_7_8Aug2022_details.txt' ! Name of output file with detailed data
     
     !CALL THE SUBROUTINE TO READ DATA FROM A START ROW TO AN END ROW
-    call read_file("Data_Stuttgart_Aug2022_minute.txt", 9062, 11402)
+    call read_file("Data_Stuttgart_Aug2022_minute_resolution.txt", 9062, 11402)
     
     output_unit_number = 11
     output_DETAILS_unit_number = 12

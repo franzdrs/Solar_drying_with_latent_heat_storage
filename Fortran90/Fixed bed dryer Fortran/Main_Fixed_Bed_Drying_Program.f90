@@ -197,7 +197,7 @@ program Deep_Bed_Drying
     integer, allocatable :: write_pos_index(:)
     double precision, allocatable :: delta_Ta(:), delta_Xa(:), delta_Tp(:), delta_Xp(:)
     
-    character(len=100) :: output_file = 'FBD_Output_from_LHS_Stutt_Aug2022 - SOFTX.txt'
+    character(len=100) :: output_file = 'FBD_Output_from_LHS_Stutt_Aug2022.txt'
     
     output_unit_number = 12
     
@@ -205,7 +205,7 @@ program Deep_Bed_Drying
     relax = 0.9             ! Underrelaxation factor, can be lower than 1 for stability if required but more than 0
     
     !Call the subroutine to read data
-    call read_file_LHS_output("LHS_Output_SAH_20m2_Slab3m_Stutt_7_8Aug2022 - SOFTX.txt")
+    call read_file_LHS_output("LHS_Output_SAH_20m2_Slab3m_Stutt_7_8Aug2022 as Input.txt")
     
     ! Make a rh_inlet vector based on the input data air conditions
     allocate(rh_in(0:size(Xa_in)-1))

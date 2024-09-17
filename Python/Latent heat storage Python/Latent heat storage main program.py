@@ -56,10 +56,10 @@ def extract_data(filename):
 
 # MAIN PROGRAM
 
-Input_file = "SAH_Output_20m2_Stutt_7_8Aug2022 - SOFTX.txt"
-Output_file = "LHS_Output_SAH_20m2_Slab3m_Stutt_7_8Aug2022B.txt"
-Output_file_DETAILS_T = "LHS_Output_SAH_20m2_Slab3m_Stutt_7_8Aug2022_DETAILS_TB.txt"
-Output_file_DETAILS_H = "LHS_Output_SAH_20m2_Slab3m_Stutt_7_8Aug2022_DETAILS_HB.txt"
+Input_file = "SAH_Output_20m2_Stutt_7_8Aug2022 as Input.txt"
+Output_file = "LHS_Output_SAH_20m2_Slab3m_Stutt_7_8Aug2022.txt"
+Output_file_DETAILS_T = "LHS_Output_SAH_20m2_Slab3m_Stutt_7_8Aug2022_DETAILS_T.txt"
+Output_file_DETAILS_H = "LHS_Output_SAH_20m2_Slab3m_Stutt_7_8Aug2022_DETAILS_H.txt"
 
 # READING DATA FROM FILE
 date, hour_min, hour_dec, t_min, Ins, Tamb, wind, P_atm, X_in, Ta_in, mdot_a = extract_data(Input_file)

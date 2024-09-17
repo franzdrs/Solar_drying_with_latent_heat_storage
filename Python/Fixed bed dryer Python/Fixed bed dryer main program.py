@@ -126,8 +126,8 @@ def drying_rate_n_parameter():
 
 # MAIN PROGRAM
 
-Input_file = "LHS_Output_SAH_20m2_Slab3m_Stutt_7_8Aug2022 - SOFTX.txt"
-Output_file = "FBD_Output_from_SAH20m2_LHS3m_Stutt_7_8Aug2022A.txt"   
+Input_file = "LHS_Output_SAH_20m2_Slab3m_Stutt_7_8Aug2022 as Input.txt"
+Output_file = "FBD_Output_from_SAH20m2_LHS3m_Stutt_7_8Aug2022.txt"   
 
 # READING DATA FROM FILE
 date, hour_min, hour_dec, t_min, Ins, Tamb, wind, P_atm, Xa_in, Ta_in, mdot_a = extract_data_LHS_output(Input_file)

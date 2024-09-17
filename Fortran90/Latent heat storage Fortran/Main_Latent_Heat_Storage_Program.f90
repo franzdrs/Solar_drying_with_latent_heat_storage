@@ -103,7 +103,7 @@ program LHS_2D
     character(len=100) :: output_DETAILS_H_file = 'LHS_Output_SAH_20m2_Slab3m_Stutt_7_8Aug2022_DETAILS_H.txt'
     
     !Call the subroutine to read data
-    call read_file("SAH_Output_20m2_Stutt_7_8Aug2022 - SOFTX.txt")
+    call read_file("SAH_Output_20m2_Stutt_7_8Aug2022 as Input.txt")
     
     output_unit_number = 11
     output_DETAILS_T_unit_number = 12
